@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import Listform
-from .models import list
+from .forms import Listform, WorkVolumeform
+from .models import list, Work_Volume
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
@@ -76,3 +76,17 @@ def logout_user(request):
     logout(request)
     messages.success(request, 'You have been logged out!')
     return redirect('logon')
+
+
+def work_volume(request):
+    if request.method == 'POST':
+        form = WorkVolumeform(request.POST or None)
+        if form.is_valid():
+            form.save()
+
+        work_volume_items = Work_Volume.objects.all
+        messages.success(request, ('Item has been added to the list!'))
+        return render(request, 'work_volume/work_volume_create.html', {'work_volume_items': work_volume_items})
+    else:
+        work_volume_items = Work_Volume.objects.all
+        return render(request, 'work_volume/work_volume_create.html', {'work_volume_items': work_volume_items})

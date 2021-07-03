@@ -10,6 +10,6 @@ urlpatterns = [
     path('edit/<list_id>',views.edit, name='edit'),
     path('authenticate/logon',views.logon, name='logon'),
     path('authenticate/logout', views.logout_user, name='logout'),
-
+    path('work_volume/work_volume',views.work_volume, name='work_volume'),
 
     ]
