@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import Listform, WorkVolumeform
-from .models import list, Work_Volume
+from .forms import Listform, WorkVolumeform, SlabLevelForm, SiteForm, WVMainForm, WVDailyReportDetailsForm
+from .models import list, Work_Volume, Slab_Level, Site, WV_Main, WV_Daily_Report_Details
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 
@@ -57,6 +57,7 @@ def edit(request, list_id ):
         item = list.objects.get(pk=list_id)
         return render(request, 'edit.html', {'item': item})
 
+
 def logon(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -72,6 +73,7 @@ def logon(request):
     else:
         return render(request, 'authenticate/User_Logon.html', {})
 
+
 def logout_user(request):
     logout(request)
     messages.success(request, 'You have been logged out!')
@@ -86,7 +88,81 @@ def work_volume(request):
 
         work_volume_items = Work_Volume.objects.all
         messages.success(request, ('Item has been added to the list!'))
-        return render(request, 'work_volume/work_volume_create.html', {'work_volume_items': work_volume_items})
+        return render(request, 'admin/work_volume_create.html', {'work_volume_items': work_volume_items})
     else:
         work_volume_items = Work_Volume.objects.all
-        return render(request, 'work_volume/work_volume_create.html', {'work_volume_items': work_volume_items})
+        return render(request, 'admin/work_volume_create.html', {'work_volume_items': work_volume_items})
+
+
+def slab_level(request):
+    if request.method == 'POST':
+        form = SlabLevelForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+
+        slab_level_items = Slab_Level.objects.all
+        messages.success(request, ('Item has been added to the list!'))
+        return render(request, 'admin/slab_level_create.html', {'slab_level_items': slab_level_items})
+    else:
+        slab_level_items = Slab_Level.objects.all
+        return render(request, 'admin/slab_level_create.html', {'slab_level_items': slab_level_items})
+
+
+def site(request):
+    if request.method == 'POST':
+        form = SiteForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+
+        site_items = Site.objects.all
+        messages.success(request, ('Item has been added to the list!'))
+        return render(request, 'admin/site_create.html', {'site_items': site_items})
+    else:
+        site_items = Site.objects.all
+        return render(request, 'admin/site_create.html', {'site_items': site_items})
+
+
+def wv_main(request):
+    if request.method == 'POST':
+        form = WVMainForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+
+        wv_main_items = WV_Main.objects.all
+        messages.success(request, ('Item has been added to the list!'))
+        return render(request, 'submission/wv_submit_report.html', {'wv_main_items': wv_main_items})
+    else:
+        wv_main_items = WV_Main.objects.all
+        return render(request, 'submission/wv_submit_report.html', {'wv_main_items': wv_main_items})
+
+
+def daily_wv_submission(request, site_id):
+
+    if request.method == 'POST':
+        #wv_main_item = WV_Main.objects.get(pk=site_id)
+
+
+        #form = WVMainForm(request.POST or None, instance=wv_main_item)
+
+        #if form.is_valid():
+        #    form.save()
+        wv_main_item = WV_Main.objects.get(pk=site_id)
+        work_volume_items = Work_Volume.objects.all
+        slab_level_items = Slab_Level.objects.all
+
+        form = WVDailyReportDetailsForm(request.POST or None)
+        if form.is_valid():
+            form.save()
+
+        messages.success(request, ('Item has been added to the list!'))
+        return render(request, 'submission/submit_daily_workvolume.html', {'wv_main_item': wv_main_item,
+                                                                           'work_volume_items': work_volume_items,
+                                                                           'slab_level_items': slab_level_items})
+
+    else:
+        wv_main_item = WV_Main.objects.get(pk=site_id)
+        work_volume_items = Work_Volume.objects.all
+        slab_level_items = Slab_Level.objects.all
+        return render(request, 'submission/submit_daily_workvolume.html', {'wv_main_item': wv_main_item,
+                                                                           'work_volume_items': work_volume_items,
+                                                                           'slab_level_items': slab_level_items})

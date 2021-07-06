@@ -1,0 +1,64 @@
+
+{% extends 'base.html' %}
+
+{% block title %}To-Do-List{% endblock %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+    <form class="d-flex" method="post">
+            {% csrf_token %}
+            <input class="form-control" type="input" placeholder="Site" aria-label="CD_Site" name ="CD_Site"> <br>
+            <input class="form-control" type="input" placeholder="Site Supervisor" aria-label="TX_Site_Supervisor" name ="TX_Site_Supervisor"> <br>
+            <input class="form-control" type="input" placeholder="Site In_charge Design" aria-label="TX_Site_In_charge_Design" name ="TX_Site_In_charge_Design"><br>
+            <input class="form-control" type="input" placeholder="Site In_charge QS" aria-label="TX_Site_In_charge_QS" name ="TX_Site_In_charge_QS"><br>
+            <input class="form-control" type="input" placeholder="Site Manager" aria-label="TX_Site_Manager" name ="TX_Site_Manager"><br>
+            <input class="form-control" type="input" placeholder="Construction Manager" aria-label="TX_Construction_Manager" name ="TX_Construction_Manager"><br>
+
+            <button class="btn btn-outline-success" type="submit">Add</button>
+    </form>
+    <br>
+
+{% if messages %}
+
+      {% for message in messages %}
+        <br>
+        <!-- alert box section start -->
+         <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <!-- alert box section end -->
+   {% endfor %}
+
+{% endif %}
+    {%if wv_main_items %}
+    <div class="row">
+      {% for things in wv_main_items %}
+
+      <div class="col-md-4">
+        <div class="card h-100">
+          <a href="{% url 'wv_daily_submission' things.id %}" class="btn btn-primary">{{ things.CD_Site }}</a>
+          <div class="card-body">
+              <label>Site Supervisor</label><p class="card-text form-control">{{ things.TX_Site_Supervisor }}</p>
+              <label>Site Design In Charge</label><p class="card-text form-control">{{ things.TX_Site_In_charge_Design }}</p>
+              <label>Site QS In Charge</label><p class="card-text form-control">{{ things.TX_Site_In_charge_QS }}</p>
+              <label>Site Manager</label><p class="card-text form-control">{{ things.TX_Site_Manager }}</p>
+              <label>Site Construction Manager</label><p class="card-text form-control">{{ things.TX_Construction_Manager }}</p>
+          </div>
+          <div class="card-footer">
+              <p class="card-text">Created Date : {{ things.created_date }}</p>
+              <p class="card-text">Modified Date: {{ things.modified_date }}</p>
+            <a href="{% url 'wv_daily_submission' things.id %}" class="btn btn-primary">Click</a>
+          </div>
+        </div>
+      </div>
+
+
+        {% endfor %}
+    </div>
+   {% endif %}
+</div>
+
+{% endblock %}

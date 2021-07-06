@@ -1,0 +1,44 @@
+
+{% extends 'base.html' %}
+
+{% block title %}To-Do-List{% endblock %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+    <form class="d-flex" method="post">
+            {% csrf_token %}
+            <input class="form-control me-2" type="input" placeholder="Slab Level" aria-label="TX_Slab_Level_Name" name ="TX_Site_Name">
+            <button class="btn btn-outline-success" type="submit">Add</button>
+    </form>
+    <br>
+{% if messages %}
+
+      {% for message in messages %}
+        <br>
+        <!-- alert box section start -->
+         <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <!-- alert box section end -->
+   {% endfor %}
+
+{% endif %}
+    {%if slab_level_items %}
+
+    <table class="table table-bordered">
+      {% for things in site_items %}
+            <tr class="table-primary">
+
+                <td><center><a href="#">{{ things.TX_Site_Name }}</a> </center></td>
+                <td><center>{{ things.Is_Active }}</center></td>
+            </tr>
+        {% endfor %}
+    </table>
+   {% endif %}
+</div>
+
+
+{% endblock %}
