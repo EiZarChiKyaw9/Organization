@@ -28,12 +28,13 @@ class SiteForm (forms.ModelForm):
 class WVMainForm (forms.ModelForm):
     class Meta:
         model = WV_Main
-        fields= ["CD_Site", "TX_Site_Supervisor", "TX_Site_In_charge_Design", "TX_Site_In_charge_QS", "TX_Site_Manager", "TX_Construction_Manager", "Is_Active"]
+        fields= ["CD_Site", "TX_Site_Supervisor", "TX_Site_In_charge_Design", "TX_Site_In_charge_QS", "TX_Site_Manager"
+            ,"TX_Construction_Manager", "Is_Active"]
 
 
 class WVDailyReportDetailsForm (forms.ModelForm):
     class Meta:
         model = WV_Daily_Report_Details
-        fields= ["ID_WV_Main","TX_Panel_No","TX_Zone","CD_Slab_Level","CD_Work","TX_Man_Power_Work","TX_Sur_Joint","PU_Kg","PU_PKR"
-            ,"Volume_L","Volume_W","Volume_H","Volume","AREA","Progress","Cement","Rebar_Qty","Rebar_Length",
-                 "Rebar_Size","Surface_or_Join","Is_Active"]
+        fields= ["ID_WV_Main","TX_Panel_No","TX_Zone","CD_Slab_Level","CD_Work","TX_Man_Power_Work","TX_Sur_Joint"
+            ,"PU_Kg","PU_PKR","Volume_L","Volume_W","Volume_H","Volume","AREA","Progress","Cement","Rebar_Qty"
+            ,"Rebar_Length","Rebar_Size","Is_Active"]
