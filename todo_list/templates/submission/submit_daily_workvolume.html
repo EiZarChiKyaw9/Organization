@@ -19,17 +19,173 @@
       {
         $("#pu").show();
         $("#lw").show();
-        $("#vc").show();
-        $("#RSQ").show();
-        $("#RL").show();
-      }
-      else
-      {
-        $("#pu").hide();
-        $("#lw").hide();
-        $("#vc").hide();
+        $("#A").show();
+        $("#H").hide();
+        $("#V").hide();
+        $("#Ce").hide();
         $("#RSQ").hide();
         $("#RL").hide();
+      }
+      else if( this.value == 'US')
+      {
+        $("#lw").show();
+        $("#A").show();
+        $("#H").hide();
+        $("#V").hide();
+        $("#Ce").hide();
+        $("#RSQ").hide();
+        $("#RL").hide();
+        $("#pu").hide();
+
+      }
+       else if( this.value == 'BG')
+      {
+        $("#lw").show();
+        $("#A").show();
+        $("#H").show();
+        $("#V").show();
+        $("#Ce").hide();
+        $("#RSQ").hide();
+        $("#RL").hide();
+        $("#pu").hide();
+
+      }
+       else if( this.value == 'PA')
+      {
+        $("#lw").show();
+        $("#A").show();
+        $("#H").show();
+        $("#V").show();
+        $("#Ce").show();
+        $("#RSQ").hide();
+        $("#RL").hide();
+        $("#pu").hide();
+
+      }
+       else if( this.value == 'CG')
+      {
+        $("#lw").show();
+        $("#A").show();
+        $("#H").show();
+        $("#V").show();
+        $("#Ce").show();
+        $("#RSQ").hide();
+        $("#RL").hide();
+        $("#pu").hide();
+
+      }
+      else if( this.value == 'HK')
+      {
+        $("#lw").hide();
+        $("#A").hide();
+        $("#H").hide();
+        $("#V").hide();
+        $("#Ce").hide();
+        $("#RSQ").hide();
+        $("#RL").hide();
+        $("#pu").hide();
+
+      }
+      else if( this.value == 'DL')
+      {
+        $("#lw").hide();
+        $("#A").hide();
+        $("#H").hide();
+        $("#V").hide();
+        $("#Ce").hide();
+        $("#RSQ").show();
+        $("#RL").hide();
+        $("#pu").hide();
+
+      }
+      else if( this.value == 'PR')
+      {
+        $("#lw").hide();
+        $("#A").hide();
+        $("#H").hide();
+        $("#V").hide();
+        $("#Ce").hide();
+        $("#RSQ").show();
+        $("#RL").show();
+        $("#pu").hide();
+
+      }
+      else if( this.value == 'BW')
+      {
+        $("#lw").hide();
+        $("#A").hide();
+        $("#H").hide();
+        $("#V").hide();
+        $("#Ce").show();
+        $("#RSQ").hide();
+        $("#RL").hide();
+        $("#pu").hide();
+      }
+      else if( this.value == 'FW-OPEN')
+      {
+        $("#lw").hide();
+        $("#A").hide();
+        $("#H").hide();
+        $("#V").hide();
+        $("#Ce").hide();
+        $("#RSQ").hide();
+        $("#RL").hide();
+        $("#pu").hide();
+      }
+      else if( this.value == 'FW-CLOSE')
+      {
+        $("#lw").hide();
+        $("#A").hide();
+        $("#H").hide();
+        $("#V").hide();
+        $("#Ce").hide();
+        $("#RSQ").hide();
+        $("#RL").hide();
+        $("#pu").hide();
+      }
+      else if( this.value == 'BC')
+      {
+        $("#lw").hide();
+        $("#A").hide();
+        $("#H").hide();
+        $("#V").hide();
+        $("#Ce").hide();
+        $("#RSQ").show();
+        $("#RL").hide();
+        $("#pu").hide();
+      }
+      else if( this.value == 'PU-C')
+      {
+        $("#lw").hide();
+        $("#A").hide();
+        $("#H").hide();
+        $("#V").hide();
+        $("#Ce").hide();
+        $("#RSQ").hide();
+        $("#RL").hide();
+        $("#pu").hide();
+      }
+      else if( this.value == 'COL-H')
+      {
+        $("#lw").show();
+        $("#A").show();
+        $("#H").show();
+        $("#V").show();
+        $("#Ce").hide();
+        $("#RSQ").hide();
+        $("#RL").hide();
+        $("#pu").hide();
+      }
+       else if( this.value == 'CORING')
+      {
+        $("#lw").hide();
+        $("#A").hide();
+        $("#H").hide();
+        $("#V").hide();
+        $("#Ce").hide();
+        $("#RSQ").hide();
+        $("#RL").hide();
+        $("#pu").hide();
       }
     });
 });
@@ -41,16 +197,21 @@
         });
         function calculate(e)
         {
-            $('#v_Area').val($('#v_Width').val() * $('#v_Length').val());
+            var num = $('#v_Width').val() * $('#v_Length').val();
+            var n = num.toFixed(2);hum
+
+            $('#v_Area').val(n) ;
         }
-    </script>
+    </script>s
     <script>
             $(document).ready(function(){
                 $('#v_Height').keyup(cal);
             });
             function cal(s)
             {
-                $('#v_Volume').val($('#v_Height').val() * $('#v_Area').val());
+               var num = $('#v_Height').val() * $('#v_Area').val();
+               var n2 = num.toFixed(2);
+               $('#v_Volume').val(n2) ;
             }
         </script>
     <script>
@@ -150,8 +311,8 @@
 
                          <select class="form-select" name="TX_Sur_Joint" aria-label="Default select example" required>
                             <option selected>Select Surface or Joint</option>
-                                <option value=01>Surface</option>
-                             <option value=02>Joint</option>
+                                <option value=Surface>Surface</option>
+                             <option value=Joint>Joint</option>
                         </select>
 
                     </div>
@@ -197,25 +358,29 @@
                       <input type="text" class="form-control" placeholder="Width" name="Volume_W" id="v_Width">
                     </div>
                 </div>
-
+                <div class="row" id="H">
                     <div class="col-md-4 mb-3">
                       <label>Height</label>
                       <input type="text" class="form-control" placeholder="Height" name="Volume_H" id="v_Height">
                     </div>
+                </div>
+                 <div class="row" id="A">
                     <div class="col-md-4 mb-3">
                       <label>Area</label>
                       <input type="text" class="form-control" placeholder="Area" name="AREA" id="v_Area">
                     </div>
+                  </div>
 
-                <div class="row" id="vc">
+                <div class="row" id="V">
                     <div class="col-md-4 mb-3">
                       <label>Volume</label>
                       <input type="text" class="form-control" placeholder="Volume" name="Volume" id="v_Volume">
                     </div>
-
+                </div>
+                <div class="row" id="Ce">
                     <div class="col-md-4 mb-3">
                       <label>Cement</label>
-                      <input type="text" class="form-control" placeholder="Cement" name="Cement">
+                      <input type="text" class="form-control" placeholder="Cement" name="Cement" >
                     </div>
                 </div>
 
@@ -224,16 +389,16 @@
 
                      <div class="col-md-4 mb-3">
                       <label>Rebar Size</label>
-                      <input type="text" class="form-control" placeholder="Rebar Size" name="Rebar_Size">
+                      <input type="text" class="form-control" placeholder="Rebar Size" name="Rebar_Size" >
                     </div>
                     <div class="col-md-4 mb-3">
                       <label>Rebar Qty</label>
-                      <input type="text" class="form-control" placeholder="Rebar Qty" name="Rebar_Qty">
+                      <input type="text" class="form-control" placeholder="Rebar Qty" name="Rebar_Qty" >
                     </div>
                 </div>
                     <div class="col-md-4 mb-3" id="RL">
                       <label>Rebar Length</label>
-                      <input type="text" class="form-control" placeholder="Rebar Length" name="Rebar_Length">
+                      <input type="text" class="form-control" placeholder="Rebar Length" name="Rebar_Length" id="R-L">
                     </div>
                     <button class="btn btn-outline-success" type="submit">Add</button>
 
@@ -263,8 +428,36 @@
 
            <br>
               <br>
+
+
               {% if Daily_report_Details_items %}
                 <table class="table table-striped secondary border" style="Color:#dcdcdc; line-height:1;">
+                   <thead>
+                   <!--<a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>-->
+                   <tr>
+                   <th><center>Site Name</center></th>
+                   <!--<th>Is_Active</th>-->
+                   <th class="text-center"><center>Panel No</center></th>
+                   <th class="text-center"><center>Zone</center></th>
+                   <th class="text-center"><center>Slab Level</center></th>
+                   <th class="text-center"><center>Work</center></th>
+                   <th class="text-center"><center>Manpower</center></th>
+                   <th class="text-center"><center>S/J</center></th>
+                   <th class="text-center"><center>PU-Kg</center></th>
+                   <th class="text-center"><center>PU-PKR</center></th>
+                   <th class="text-center"><center>L(m)</center></th>
+                   <th class="text-center"><center>W(m)</center></th>
+                   <th class="text-center"><center>H(m)</center></th>
+                   <th class="text-center"><center>Area</center></th>
+                   <th class="text-center"><center>Volume</center></th>
+                   <th class="text-center"><center>Cement</center></th>
+                   <th class="text-center"><center>Rebar-Qty</center></th>
+                   <th class="text-center"><center>Rebar-Length</center></th>
+                   <th class="text-center"><center>Rebar-Size</center></th>
+                   <th class="text-center"><center>Date</center></th>
+                   <th class="text-center"><center>Progress</center></th>
+                   </tr>
+                   </thead>
 
                   {% for things in Daily_report_Details_items %}
                     <tr style="Color:#dcdcdc;">
@@ -277,9 +470,17 @@
                     <td>{{ things.TX_Sur_Joint }}</td>
                     <td>{{ things.PU_Kg }}</td>
                     <td>{{ things.PU_PKR }}</td>
+                    <td>{{ things.Volume_L }}</td>
                     <td>{{ things.Volume_W }}</td>
                     <td>{{ things.Volume_H }}</td>
+                    <td>{{ things.AREA }}</td>
+                    <td>{{ things.Volume }}</td>
+                    <td>{{ things.Cement }}</td>
+                    <td>{{ things.Rebar_Qty }}</td>
+                    <td>{{ things.Rebar_Length }}</td>
+                    <td>{{ things.Rebar_Size }}</td>
                     <td>{{ things.created_date }}</td>
+                    <td>{{ things.Progress }}</td>
                     </tr>
                     {% endfor %}
                 </table>

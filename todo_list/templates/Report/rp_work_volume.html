@@ -46,6 +46,32 @@
               <br>
               {% if wv_rp_items %}
                 <table class="table table-striped secondary border" style="Color:#dcdcdc; line-height:1;">
+                 <thead>
+                   <!--<a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>-->
+                   <tr>
+                   <th><center>Site Name</center></th>
+                   <!--<th>Is_Active</th>-->
+                   <th class="text-center"><center>Panel No</center></th>
+                   <th class="text-center"><center>Zone</center></th>
+                   <th class="text-center"><center>Slab Level</center></th>
+                   <th class="text-center"><center>Work</center></th>
+                   <th class="text-center"><center>Manpower</center></th>
+                   <th class="text-center"><center>S/J</center></th>
+                   <th class="text-center"><center>PU-Kg</center></th>
+                   <th class="text-center"><center>PU-PKR</center></th>
+                   <th class="text-center"><center>L(m)</center></th>
+                   <th class="text-center"><center>W(m)</center></th>
+                   <th class="text-center"><center>H(m)</center></th>
+                   <th class="text-center"><center>Area</center></th>
+                   <th class="text-center"><center>Volume</center></th>
+                   <th class="text-center"><center>Cement</center></th>
+                   <th class="text-center"><center>Rebar-Qty</center></th>
+                   <th class="text-center"><center>Rebar-Length</center></th>
+                   <th class="text-center"><center>Rebar-Size</center></th>
+                   <th class="text-center"><center>Date</center></th>
+                   <th class="text-center"><center>Progress</center></th>
+                   </tr>
+                   </thead>
 
                   {% for things in wv_rp_items %}
                     <tr style="Color:#dcdcdc;">
@@ -59,9 +85,17 @@
                     <td>{{ things.TX_Sur_Joint }}</td>
                     <td>{{ things.PU_Kg }}</td>
                     <td>{{ things.PU_PKR }}</td>
+                    <td>{{ things.Volume_L }}</td>
                     <td>{{ things.Volume_W }}</td>
                     <td>{{ things.Volume_H }}</td>
+                    <td>{{ things.AREA }}</td>
+                    <td>{{ things.Volume }}</td>
+                    <td>{{ things.Cement }}</td>
+                    <td>{{ things.Rebar_Qty }}</td>
+                    <td>{{ things.Rebar_Length }}</td>
+                    <td>{{ things.Rebar_Size }}</td>
                     <td>{{ things.created_date }}</td>
+                    <td>{{ things.Progress }}</td>
                     </tr>
                     {% endfor %}
                 </table>
