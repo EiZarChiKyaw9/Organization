@@ -57,7 +57,7 @@ class WV_Daily_Report_Details(models.Model):
     CD_Work = models.CharField(max_length=200)
     TX_Man_Power_Work = models.CharField(max_length=200)
     TX_Sur_Joint = models.CharField(max_length=200)
-    PU_Kg= models.CharField(max_length=200, null=True, blank=True)
+    PU_Kg = models.CharField(max_length=200, null=True, blank=True)
     PU_PKR = models.CharField(max_length=200, null=True, blank=True)
     Volume_L = models.CharField(max_length=200, null=True, blank=True)
     Volume_W = models.CharField(max_length=200, null=True, blank=True)
