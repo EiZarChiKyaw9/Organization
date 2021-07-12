@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %} This is title To do List | edit {% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+<!--{% url 'report_csv' %}-->
+    <div class="container">
+        <H3><center>Daily Work Volume Report</center> </H3>
+       <a href="{% url 'report_csv' %}" class="btn btn-secondary mb-3" id="export">Export CSV</a>
+        <a class="btn btn-secondary mb-3" href="{% url 'home' %}" role="button">Back</a>
+        <input type="text" class="form-control" placeholder="" id="main" name="ID_WV_Main" required>
+        <br>
+        <div class="row mb-3">
+            <form method="post">
+                {% csrf_token %}
+                <br><br>
+
+            <div class="form col-md-3 me-2">
+                <div class="col-md-12">
+
+                 <select id="site1" class="form-select" name="site_id" aria-label="Default select example"  required>
+                    <option selected>Select Site</option>
+                     {%if site_items %}
+                        {% for things in site_items %}
+                            <option value="{{ things.TX_Site_Name }}">{{ things.TX_Site_Name }}</option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+            </div>
+                </form>
+        </div>
+        </div>
+           <br>
+            <br>
+              <br>
+              {% if wv_rp_items %}
+                <table class="table table-striped secondary border" style="Color:#dcdcdc; line-height:1;">
+
+                  {% for things in wv_rp_items %}
+                    <tr style="Color:#dcdcdc;">
+                    <td>{{ things.ID_WV_Main }}</td>
+
+                    <td>{{ things.TX_Panel_No }}</td>
+                    <td>{{ things.TX_Zone }}</td>
+                    <td>{{ things.CD_Slab_Level }}</td>
+                    <td>{{ things.CD_Work }}</td>
+                    <td>{{ things.TX_Man_Power_Work }}</td>
+                    <td>{{ things.TX_Sur_Joint }}</td>
+                    <td>{{ things.PU_Kg }}</td>
+                    <td>{{ things.PU_PKR }}</td>
+                    <td>{{ things.Volume_W }}</td>
+                    <td>{{ things.Volume_H }}</td>
+                    <td>{{ things.created_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% endif %}
+        </div>
+        </div>
+</body>
+</html>
+
+{% endblock %}

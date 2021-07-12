@@ -9,21 +9,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $('#purpose').on('change', function() {
-              if ( this.value == '1')
-              //.....................^.......
-              {
-                $("#business").show();
-              }
-              else
-              {
-                $("#business").hide();
-              }
-            });
-        });
+    $(document).ready(function(){
+    $('#purpose').on('change', function() {
+        alert(this.value);
+      if ( this.value == 'PU')
+      //.....................^.......
+      {
+        $("#pu").show();
+        $("#lw").show();
+        $("#vc").show();
+        $("#RSQ").show();
+        $("#RL").show();
+      }
+      else
+      {
+        $("#pu").hide();
+        $("#lw").hide();
+        $("#vc").hide();
+        $("#RSQ").hide();
+        $("#RL").hide();
+      }
+    });
+});
     </script>
+        <script>
+        $(document).ready(function(){
+            $('#v_Width').keyup(calculate);
+            $('#v_Length').keyup(calculate);
+        });
+        function calculate(e)
+        {
+            $('#v_Area').val($('#v_Width').val() * $('#v_Length').val());
+        }
+    </script>
+    <script>
+            $(document).ready(function(){
+                $('#v_Height').keyup(cal);
+            });
+            function cal(s)
+            {
+                $('#v_Volume').val($('#v_Height').val() * $('#v_Area').val());
+            }
+        </script>
+    <script>
+            $(document).ready(function(){
+                $('#Site').textchanged(f);
+            });
+            function getid(f)
+            {
+                $('#main').val($('#v_Height').val());
+            }
+        </script>
 </head>
 <body>
 
@@ -53,7 +91,8 @@
                         <div class="row">
                         <div class="col-md-4 mb-3">
                           <label>Site Name</label>
-                          <input type="text" class="form-control" placeholder="" value="2" name="ID_WV_Main" required>
+                            <input type="text" class="form-control" placeholder="" id="main" name="ID_WV_Main" value="{{ wv_main_item.CD_Site }}" required>
+                            <!--<p type="text" id="Site" class="form-control" placeholder="" name="ID_WV_Main" required>{{ wv_main_item.CD_Site }}</p>-->
                         </div>
 
                         <div class="col-md-4 mb-3">
@@ -74,7 +113,7 @@
                             <option selected>Select Slab Level</option>
                              {%if slab_level_items %}
                                 {% for things in slab_level_items %}
-                                    <option value={{ things.TX_Slab_Level_Name }}>{{ things.TX_Slab_Level_Name }}</option>
+                                    <option value="{{ things.TX_Slab_Level_Name }}">{{ things.TX_Slab_Level_Name }}</option>
                                 {% endfor %}
                             {% endif %}
                         </select>
@@ -86,7 +125,7 @@
                         <div class="form-group row">
                 <div class="col-sm-12">
 
-                         <select class="form-select" name="CD_Work" aria-label="Default select example" id="inputContent" required>
+                         <select id="purpose" class="form-select" name="CD_Work" aria-label="Default select example" required>
                             <option selected>Select Defect</option>
                              {%if work_volume_items %}
                                 {% for things in work_volume_items %}
@@ -118,47 +157,9 @@
                     </div>
                     </div>
 
-                <div class="col-md-6 mb-3">
-                      <label>PU Kg</label>
-                      <input type="text" class="form-control" placeholder="PU Kg" name="PU_Kg" required>
-                    </div>
-
-                <div class="col-md-6 mb-3">
-                      <label>PU PKR</label>
-                      <input type="text" class="form-control" placeholder="PU PKR" name="PU_PKR" required>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                      <label>Length</label>
-                      <input type="text" class="form-control" placeholder="Length" name="Volume_L" required>
-                    </div>
-
-
-                <div class="col-md-3 mb-3">
-                      <label>Width</label>
-                      <input type="text" class="form-control" placeholder="Width" name="Volume_W" required>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                      <label>Height</label>
-                      <input type="text" class="form-control" placeholder="Height" name="Volume_H" required>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                      <label>Volume</label>
-                      <input type="text" class="form-control" placeholder="Volume" name="Volume" required>
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                      <label>Area</label>
-                      <input type="text" class="form-control" placeholder="Area" name="AREA" required>
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                      <label>Cement</label>
-                      <input type="text" class="form-control" placeholder="Cement" name="Cement">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
+                <div class="col-md-4 mb-3">
                       <label>Progress</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-12">
 
                          <select class="form-select" name="Progress" aria-label="Default select example" required>
                             <option selected>Select Progress</option>
@@ -173,20 +174,67 @@
                         </div>
                     </div>
 
+                <div class="row" id="pu">
+                <div class="col-md-4 mb-3" >
+                      <label>PU Kg</label>
+                      <input type="text" class="form-control" placeholder="PU Kg" name="PU_Kg">
+                    </div>
+
+                <div class="col-md-4 mb-3">
+                      <label>PU PKR</label>
+                      <input type="text" class="form-control" placeholder="PU PKR" name="PU_PKR">
+                    </div>
+
+                </div>
+
+                <div class="row" id="lw">
+                <div class="col-md-4 mb-3">
+                      <label>Length</label>
+                      <input type="text" class="form-control" placeholder="Length" name="Volume_L" id="v_Length">
+                    </div>
+                <div class="col-md-4 mb-3">
+                      <label>Width</label>
+                      <input type="text" class="form-control" placeholder="Width" name="Volume_W" id="v_Width">
+                    </div>
+                </div>
 
                     <div class="col-md-4 mb-3">
-                      <label>Rebar Qty</label>
-                      <input type="text" class="form-control" placeholder="Rebar Qty" name="Rebar_Qty">
+                      <label>Height</label>
+                      <input type="text" class="form-control" placeholder="Height" name="Volume_H" id="v_Height">
                     </div>
                     <div class="col-md-4 mb-3">
-                      <label>Rebar Length</label>
-                      <input type="text" class="form-control" placeholder="Rebar Length" name="Rebar_Length">
+                      <label>Area</label>
+                      <input type="text" class="form-control" placeholder="Area" name="AREA" id="v_Area">
                     </div>
+
+                <div class="row" id="vc">
+                    <div class="col-md-4 mb-3">
+                      <label>Volume</label>
+                      <input type="text" class="form-control" placeholder="Volume" name="Volume" id="v_Volume">
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                      <label>Cement</label>
+                      <input type="text" class="form-control" placeholder="Cement" name="Cement">
+                    </div>
+                </div>
+
+
+                <div class="row" id="RSQ">
+
                      <div class="col-md-4 mb-3">
                       <label>Rebar Size</label>
                       <input type="text" class="form-control" placeholder="Rebar Size" name="Rebar_Size">
                     </div>
-
+                    <div class="col-md-4 mb-3">
+                      <label>Rebar Qty</label>
+                      <input type="text" class="form-control" placeholder="Rebar Qty" name="Rebar_Qty">
+                    </div>
+                </div>
+                    <div class="col-md-4 mb-3" id="RL">
+                      <label>Rebar Length</label>
+                      <input type="text" class="form-control" placeholder="Rebar Length" name="Rebar_Length">
+                    </div>
                     <button class="btn btn-outline-success" type="submit">Add</button>
 
                 </div> <!--row -->
@@ -214,29 +262,29 @@
 
 
            <br>
+              <br>
               {% if Daily_report_Details_items %}
-                <div class="row mb3">
+                <table class="table table-striped secondary border" style="Color:#dcdcdc; line-height:1;">
+
                   {% for things in Daily_report_Details_items %}
-
-                  <div class="col-md-4 mb3">
-                    <div class="card h-100">
-                      <a href="{% url 'wv_daily_submission' things.id %}" class="btn btn-primary">{{ things.ID_WV_Main }}</a>
-                      <div class="card-body">
-                          <label>Site Supervisor</label><p class="card-text form-control">{{ things.TX_Panel_No }}</p>
-                          <label>Site Design In Charge</label><p class="card-text form-control">{{ things.TX_Zone }}</p>
-                          <label>Site QS In Charge</label><p class="card-text form-control">{{ things.CD_Slab_Level }}</p>
-                          <label>Site Manager</label><p class="card-text form-control">{{ things.CD_Work }}</p>
-                          <label>Site Construction Manager</label><p class="card-text form-control">{{ things.TX_Man_Power_Work }}</p>
-                      </div>
-
-                    </div>
-                      <br>
-                  </div>
-
-
+                    <tr style="Color:#dcdcdc;">
+                    <td>{{ things.ID_WV_Main }}</td>
+                    <td>{{ things.TX_Panel_No }}</td>
+                    <td>{{ things.TX_Zone }}</td>
+                    <td>{{ things.CD_Slab_Level }}</td>
+                    <td>{{ things.CD_Work }}</td>
+                    <td>{{ things.TX_Man_Power_Work }}</td>
+                    <td>{{ things.TX_Sur_Joint }}</td>
+                    <td>{{ things.PU_Kg }}</td>
+                    <td>{{ things.PU_PKR }}</td>
+                    <td>{{ things.Volume_W }}</td>
+                    <td>{{ things.Volume_H }}</td>
+                    <td>{{ things.created_date }}</td>
+                    </tr>
                     {% endfor %}
-                </div>
+                </table>
                 {% endif %}
+        </div>
         </div>
 </body>
 </html>

@@ -13,6 +13,9 @@ urlpatterns = [
     path('work_volume/work_volume',views.work_volume, name='work_volume'),
     path('slab_level/slab_level',views.slab_level, name='slab_level'),
     path('site/site',views.site, name='site'),
-    path('wv_main/daily_work_volume',views.wv_main, name='daily_work_volume'),
+    path('site_info_create/site_info_create',views.wv_main, name='site_info_create'),
+    path('wv_main/submit_work_volume',views.submit_work_volume, name='submit_work_volume'),
     path('daily_wv_submission/wv_daily_submission/<site_id>',views.daily_wv_submission, name='wv_daily_submission'),
+    path('rp_work_volume/work_volume_report',views.rp_work_volume, name='work_volume_report'),
+    path('export_report_csv/report_csv',views.export_report_csv, name='report_csv'),
     ]

@@ -5,15 +5,14 @@
 {% load static %}
 
 {% block content %}
+<br><br>
 <div class="container">
 
-    <form class="d-flex" method="post">
-            {% csrf_token %}
-            <input class="form-control me-2" type="input" placeholder="Work Volume" aria-label="Tx_Name" name ="Tx_Name">
-            <button class="btn btn-outline-success" type="submit">Add</button>
-    </form>
-    <br>
-{% if messages %}
+<div class="row">
+    <h3 class="panel-title">
+        <span class="english">Defect Registration</span>
+    </h3>
+    {% if messages %}
 
       {% for message in messages %}
         <br>
@@ -26,18 +25,45 @@
    {% endfor %}
 
 {% endif %}
+    <form class="col-md-4 col-md-offset-2" method="post">
+            {% csrf_token %}
+            <span>Defect Name</span>
+            <input class="form-control col-md-6 me-2" type="input" placeholder="Defect Name" aria-label="Defect Name" name ="Tx_Name"><br>
+            <div class="d-grid gap-2">
+                <button class="btn btn-outline-primary mb-3" type="submit">Add</button>
+            </div>
+    </form>
+    <br>
+
+
     {%if work_volume_items %}
 
-    <table class="table table-bordered">
+    <br>
+    <div class="col-md-6 col-md-offset-2 primary md-2">
+        <span> Defect Lists</span>
+    <table class="table table-striped secondary border" style="Color:#dcdcdc; line-height:1;">
+    <thead>
+    <!--<a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>-->
+        <tr>
+            <th><center>Defect Name</center></th>
+            <!--<th>Is_Active</th>-->
+            <th class="text-center"><center>Action</center></th>
+        </tr>
+    </thead>
       {% for things in work_volume_items %}
-            <tr class="table-primary">
-                <td><center><a href="#">{{ things.Tx_Name }}</a> </center></td>
-                <td><center>{{ things.Is_Active }}</center></td>
+            <tr style="Color:#dcdcdc;">
+
+                <td><center>{{ things.Tx_Name }} </center></td>
+                <!--<td><center>{{ things.Is_Active }}</center></td>-->
+                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
             </tr>
         {% endfor %}
     </table>
+       </div>
+
+
    {% endif %}
 </div>
-
+</div>
 
 {% endblock %}

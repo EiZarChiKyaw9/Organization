@@ -11,8 +11,16 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/my_style.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
 
-
+    <style>
+      body {
+        background-image: url('{% static 'images/bg.jpg' %}');
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: cover;
+      }
+    </style>
   </head>
   <body>
 
@@ -36,20 +44,30 @@
             Administrator
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{% url 'work_volume' %}">Work Volume</a></li>
+            <li><a class="dropdown-item" href="{% url 'work_volume' %}">Defect</a></li>
             <li><a class="dropdown-item" href="{% url 'slab_level' %}">Slab Level</a></li>
             <li><a class="dropdown-item" href="{% url 'site' %}">Site</a></li>
 
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="{% url 'site_info_create' %}">Site Info</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Daily Report
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{% url 'daily_work_volume' %}">Daily Work Volume Report</a></li>
+            <li><a class="dropdown-item" href="{% url 'submit_work_volume' %}">Daily Work Volume Report</a></li>
+            <li><hr class="dropdown-divider"></li>
+           <!-- <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Reports
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'work_volume_report' %}">Work Volume Report</a></li>
             <li><hr class="dropdown-divider"></li>
            <!-- <li><a class="dropdown-item" href="#">Something else here</a></li>-->
           </ul>
@@ -60,8 +78,10 @@
       </ul>
       <form class="d-flex" >
         {% if user.is_authenticated %}
+        <button class="btn btn-link px-3 me-2"><a href="{% url 'logout' %}">
+          Logout </a>
+        </button>
 
-        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
         {% else %}
         <a class="nav-link" href="{% url 'logon' %}">Logon</a>
         {% endif %}
@@ -72,7 +92,8 @@
     <br>
 
   <div class="container">
-    <div class="row">
+
+    <div class="row" style="color:#dcdcdc;">
   <!--  <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
        <h4><a href="#collContent" data-toggle="collapse">Column1</a></h4>
        <div id="collContent" class="collapse in">Here are some practice lesson and typing</div>
@@ -82,14 +103,15 @@
        <div id="collContent" class="collapse in">Here are some practice lesson and typing</div>
     </div> -->
 
+        {% block content %}
 
+        {% endblock %}
 
     </div>
   </div>
 
 
-        {% block content %}
-        {% endblock %}
+
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
